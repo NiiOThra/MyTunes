@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller">
+   <children>
+      <MenuBar prefHeight="25.0" prefWidth="900.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#aboutClicked" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <AnchorPane layoutY="25.0" prefHeight="107.0" prefWidth="900.0">
+         <children>
+            <Button fx:id="btnPlaySong" layoutX="78.0" layoutY="28.0" mnemonicParsing="false" onAction="#playSongButton" prefHeight="25.0" prefWidth="90.0" text="Play/Pause" />
+            <Button fx:id="nextSongButton" layoutX="177.0" layoutY="28.0" mnemonicParsing="false" onMouseClicked="#nextButton" prefHeight="25.0" prefWidth="48.0" text="Next" />
+            <Button fx:id="previousSongButton" layoutX="14.0" layoutY="28.0" mnemonicParsing="false" onMouseClicked="#previousButton" prefHeight="25.0" prefWidth="55.0" text="Previous" />
+            <Slider fx:id="volumeSlider" layoutX="57.0" layoutY="78.0" onMouseClicked="#volumeScroll" onMouseDragged="#volumeScroll" value="75.0" />
+            <TextField fx:id="txtFilter" layoutX="617.0" layoutY="28.0" onKeyTyped="#filterSongs" prefHeight="25.0" prefWidth="185.0" />
+            <Label layoutX="569.0" layoutY="32.0" prefHeight="17.0" prefWidth="48.0" text="Filter:" />
+            <Text fx:id="lblSongPlaying" layoutX="258.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="..is playing" textAlignment="RIGHT" wrappingWidth="220.0" />
+            <Button fx:id="btnRefresh" layoutX="815.0" layoutY="28.0" mnemonicParsing="false" onAction="#refreshUI" text="Refresh UI" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="14.0" layoutY="144.0" prefHeight="424.0" prefWidth="220.0">
+         <children>
+            <Label text="Playlists" />
+            <TableView fx:id="playlistTable" layoutY="23.0" onMouseClicked="#tblPlaylistsClicked" prefHeight="363.0" prefWidth="220.0">
+              <columns>
+                <TableColumn fx:id="playlistNameColumn" prefWidth="104.0" text="Name" />
+                <TableColumn fx:id="playlistAmountOfSongsColumn" prefWidth="71.0" text="Songs" />
+                  <TableColumn fx:id="playlistTimeColumn" prefWidth="44.0" text="Time" />
+              </columns>
+            </TableView>
+            <Button layoutY="386.0" mnemonicParsing="false" onAction="#dialogNewPlaylist" text="New.." />
+            <Button layoutX="78.0" layoutY="385.0" mnemonicParsing="false" onAction="#dialogEditPlaylist" text="Edit.." />
+            <Button layoutX="148.0" layoutY="385.0" mnemonicParsing="false" onAction="#dialogDeletePlaylist" prefHeight="22.0" prefWidth="72.0" text="Delete.." />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="262.0" layoutY="144.0" prefHeight="424.0" prefWidth="220.0">
+         <children>
+            <Label text="Songs on Playlist" />
+            <TableView fx:id="songsOnPlaylistTable" layoutY="23.0" onMouseClicked="#setSelectedSongFromPlaylist" prefHeight="363.0" prefWidth="220.0">
+               <columns>
+                  <TableColumn fx:id="playlistSongsColumn" prefWidth="219.0" text="Name" />
+               </columns>
+            </TableView>
+            <Button layoutX="165.0" layoutY="386.0" mnemonicParsing="false" onAction="#dialogRemoveSongFromPlaylistSong" prefHeight="17.0" prefWidth="55.0" text="Delete" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="564.0" layoutY="144.0" prefHeight="424.0" prefWidth="322.0">
+         <children>
+            <Button layoutY="386.0" mnemonicParsing="false" onAction="#dialogNewSong" text="New.." />
+            <Label text="Songs" />
+            <TableView fx:id="songsTable" layoutY="23.0" onMouseClicked="#tblSongsClicked" prefHeight="363.0" prefWidth="322.0">
+               <columns>
+                  <TableColumn fx:id="songTableTitleColumn" prefWidth="114.0" text="Title" />
+                  <TableColumn fx:id="songTableArtistColumn" prefWidth="107.0" text="Artist" />
+                  <TableColumn fx:id="songTableCategoryColumn" prefWidth="61.0" text="Category" />
+                  <TableColumn fx:id="songTableTimeColumn" prefWidth="39.0" text="Time" />
+               </columns>
+            </TableView>
+            <Button layoutX="55.0" layoutY="386.0" mnemonicParsing="false" onAction="#dialogEditSong" text="Edit.." />
+            <Button layoutX="106.0" layoutY="386.0" mnemonicParsing="false" onAction="#dialogDeleteSong" prefHeight="17.0" prefWidth="55.0" text="Delete" />
+            <Button fx:id="closeBttn" layoutX="253.0" layoutY="386.0" mnemonicParsing="false" onAction="#close" prefHeight="25.0" prefWidth="55.0" text="Close" />
+         </children>
+      </AnchorPane>
+      <Button fx:id="btnAddToPlaylist" layoutX="492.0" layoutY="167.0" mnemonicParsing="false" onAction="#addSongToPlaylist" prefHeight="34.0" prefWidth="64.0" text="&lt;- Add" />
+   </children>
+</AnchorPane>
